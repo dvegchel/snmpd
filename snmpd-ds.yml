@@ -1,0 +1,49 @@
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: snmpd-openline
+  annotations:
+  labels:
+    app: monitoring-openline
+    component: snmpd
+spec:
+  selector:
+      matchLabels:
+        name: snmpd-openline
+  template:
+    metadata:
+      labels:
+        name: snmpd-openline
+    spec:
+      containers:
+      - image: digiwhite/snmpd
+        imagePullPolicy: Always
+        name: snmpd
+        ports:
+        - containerPort: 161
+          hostPort: 161
+          protocol: TCP
+        - containerPort: 161
+          hostPort: 161
+          protocol: UDP
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+        terminationMessagePath: /dev/termination-log
+        volumeMounts:
+        - mountPath: /host_proc
+          name: hostproc
+      dnsPolicy: ClusterFirst
+      nodeSelector:
+        monitoring-snmpd: "true"
+      hostNetwork: true
+      restartPolicy: Always
+      securityContext: {}
+      serviceAccount: snmpd
+      serviceAccountName: snmpd
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - hostPath:
+          path: /proc
+        name: hostproc
