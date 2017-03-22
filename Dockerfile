@@ -16,11 +16,6 @@ RUN > /var/log/yum.log && \
 
 RUN curl -L -o net-snmp-5.7.3.tar.gz 'https://github.com/dvegchel/snmpd/raw/master/net-snmp-5.7.3.tar.gz' && \
     tar zxf net-snmp-5.7.3.tar.gz
-
-ADD apply_patch.sh /tmp/apply_patch.sh
-
-RUN cd net-snmp-5.7.3 && \
-    ../apply_patch.sh
     
 RUN cd net-snmp-5.7.3 && \
     ./configure --prefix=/usr/local --disable-ipv6 --disable-snmpv1 --with-defaults && \
