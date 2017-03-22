@@ -14,7 +14,7 @@ RUN > /var/log/yum.log && \
 		   file
 
 
-RUN curl -L -o net-snmp-5.7.3.tar.gz 'https://github.com/dvegchel/snmpd/raw/master/net-snmp-5.7.3.tar.gz' && \
+RUN curl -L -o net-snmp-5.7.3.tar.gz 'https://github.com/dvegchel/snmpd/raw/master/net-snmp-5.7.3-patched.tar.gz' && \
     tar zxf net-snmp-5.7.3.tar.gz
     
 RUN cd net-snmp-5.7.3 && \
