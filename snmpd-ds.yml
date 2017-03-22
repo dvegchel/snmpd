@@ -1,22 +1,22 @@
 apiVersion: extensions/v1beta1
 kind: DaemonSet
 metadata:
-  name: snmpd-openline
+  name: snmpd
   annotations:
   labels:
-    app: monitoring-openline
+    app: monitoring
     component: snmpd
 spec:
   selector:
       matchLabels:
-        name: snmpd-openline
+        name: snmpd
   template:
     metadata:
       labels:
-        name: snmpd-openline
+        name: snmpd
     spec:
       containers:
-      - image: digiwhite/snmpd
+      - image: dvegchel/snmpd
         imagePullPolicy: Always
         name: snmpd
         ports:
